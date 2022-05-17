@@ -1,0 +1,22 @@
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\bin\Debug\Hide and Seek.exe.config
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\bin\Debug\Hide and Seek.exe
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\bin\Debug\Hide and Seek.pdb
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.AssemblyReference.cache
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide_and_Seek.Form1.resources
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide_and_Seek.Properties.Resources.resources
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.GenerateResource.cache
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.CoreCompileInputs.cache
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide and Seek.exe
+C:\Users\ivano\Desktop\second-edition-master\Chapter 7\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide and Seek.pdb
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\bin\Debug\Hide and Seek.exe.config
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\bin\Debug\Hide and Seek.exe
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\bin\Debug\Hide and Seek.pdb
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.AssemblyReference.cache
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.SuggestedBindingRedirects.cache
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide_and_Seek.Form1.resources
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide_and_Seek.Properties.Resources.resources
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.GenerateResource.cache
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\p316 - Hide and Seek.csproj.CoreCompileInputs.cache
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide and Seek.exe
+D:\Учёба\ООАиП\p316 - Hide and Seek\p316 - Hide and Seek\obj\x86\Debug\Hide and Seek.pdb
