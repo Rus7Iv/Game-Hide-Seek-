@@ -19,7 +19,7 @@ namespace Hide_and_Seek
         RoomWithHidingPlace diningRoom;
         RoomWithDoor kitchen;
         Room stairs;
-        //GardenGame attic;
+        Room attic; // чердак
         RoomWithHidingPlace hallway;
         RoomWithHidingPlace bathroom;
         RoomWithHidingPlace masterBedroom;
@@ -38,6 +38,7 @@ namespace Hide_and_Seek
             CreateObjects();
             opponent = new Opponent(frontYard);
             ResetGame(false);
+            GameOver(false);
         }
 
         private void MoveToANewLocation(Location newLocation)
@@ -66,12 +67,38 @@ namespace Hide_and_Seek
                 goThroughTheDoor.Visible = true;
             else
                 goThroughTheDoor.Visible = false;
+            //====================================
+            if (currentLocation == garden)
+            {
+                button2.Visible = true;
+                goHere.Visible = false;
+                exits.Visible = false;
+                description.Text = "Вы в саду. Здесь есть сарай. Можете осмотреться";
+
+                MessageBox.Show("Вы в саду. Здесь столько всего! Можно осмотреться");
+
+            }
+            //====================================
+            if (currentLocation == attic)
+            {
+                description.Text = "Чердак. Вы в ловушке! Осмотритесь";
+                timer1.Stop();
+                timer1.Interval = 15000; // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Timer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                button1.Visible = true;
+                timer1.Enabled = true;
+
+                goHere.Visible = false;
+                exits.Visible = false;
+
+                MessageBox.Show("Внимание! Вы в ловушке. Вам необходимо выбраться за 15 секунд");
+                timer1.Start();
+            }
         }
 
         private void CreateObjects()
         {
             //==================================================
-           // attic = new GardenGame("Чердак", "куча вещей", "в куче вещей", "кольцо под ковром");
+            attic = new Room("Чердак", "в куче вещей");
             //==================================================
             livingRoom = new RoomWithDoor("Гостиная", "старинный ковёр",
                       "внутри шкафа", "дубовая дверь с латунной ручкой");
@@ -104,9 +131,11 @@ namespace Hide_and_Seek
             secondBedroom.Exits = new Location[] { hallway };
             frontYard.Exits = new Location[] { backYard, garden, driveway };
             backYard.Exits = new Location[] { frontYard, garden, driveway };
-            garden.Exits = new Location[] { backYard, frontYard/*, attic*/ };
+            garden.Exits = new Location[] { attic, backYard, frontYard};
             driveway.Exits = new Location[] { backYard, frontYard };
-            //attic.Exits = new Location[] { kitchen };
+            //=======================================
+            attic.Exits = new Location[] { kitchen };
+            //=======================================
 
             livingRoom.DoorLocation = frontYard;
             frontYard.DoorLocation = livingRoom;
@@ -130,6 +159,25 @@ namespace Hide_and_Seek
             check.Visible = false;
             goThroughTheDoor.Visible = false;
             exits.Visible = false;
+            
+            timer1.Stop();
+        }
+
+        private void GameOver(bool displayMessage)
+        {
+            if (displayMessage)
+            {
+                MessageBox.Show("К сожалению, ты не смог выбраться. Игра окончена...");
+            }
+            Moves = 0;
+            hide.Visible = true;
+            goHere.Visible = false;
+            check.Visible = false;
+            goThroughTheDoor.Visible = false;
+            exits.Visible = false;
+
+            timer1.Stop();
+            description.Text = "Я начинаю считать!";
         }
 
         private void goHere_Click(object sender, EventArgs e)
@@ -171,6 +219,69 @@ namespace Hide_and_Seek
             goHere.Visible = true;
             exits.Visible = true;
             MoveToANewLocation(livingRoom);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var myList = new List<string>(new string[] { "кольцо на полу", "дверь за кучей вещей", "окно", "лестница", "стул" });
+
+            string things = myList[new Random().Next(myList.Count)];
+            MessageBox.Show("Вы обнаружили " + things + "!");
+
+            switch (things)
+            {
+                case "кольцо на полу":
+                    MessageBox.Show("О, чудо! Это оказался выход.Спускайтесь в следующую локацию");
+                    timer1.Stop();
+                    goHere.Visible = true;
+                    exits.Visible = true;
+                    button1.Visible = false;
+                    break;
+                case "дверь за кучей вещей":
+                    MessageBox.Show("К сожалению, это оказался шкаф... Продолжайте поиски");
+                    break;
+                case "окно":
+                    MessageBox.Show("Хмм... Можно попробовать, но окно слишком высоко. Так что продолжайте поиски");
+                    break;
+                case "лестница":
+                    MessageBox.Show("Можно попробовать выйти через окно, но оно слишком высоко. Ищите дальше");
+                    break;
+                case "стул":
+                    MessageBox.Show("Можно посидеть и подумать. Но у вас мало времени. Продолжайте поиски");
+                    break;
+
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            GameOver(true);
+            button1.Visible = false;
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var myList2 = new List<string>(new string[] { "Дерево", "Забор", "Лестница" });
+
+            string things2 = myList2[new Random().Next(myList2.Count)];
+
+            switch (things2)
+            {
+                case "Лестница":
+                    MessageBox.Show("Вы видите лестницу. Она ведёт на чердак. Он определённо прячется там!");
+                    goHere.Visible = true;
+                    exits.Visible = true;
+                    button2.Visible = false;
+                    break;
+                case "Забор":
+                    MessageBox.Show("Это просто забор. Его здесь нет. Ищи дальше");
+                    break;
+                case "Дерево":
+                    MessageBox.Show("Я вижу дерево. Тут прохладно, но никого нет. Ищу дальше");
+                    break;
+
+            }
         }
     }
 }
