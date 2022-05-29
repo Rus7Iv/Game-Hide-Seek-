@@ -19,8 +19,10 @@ namespace Hide_and_Seek
         RoomWithDoor livingRoom;
         RoomWithHidingPlace diningRoom;
         RoomWithDoor kitchen;
+        //========================
+        OutsideWithDoor game;
+        //========================
         Room stairs;
-        //GardenGame attic;
         RoomWithHidingPlace hallway;
         RoomWithHidingPlace bathroom;
         RoomWithHidingPlace masterBedroom;
@@ -48,9 +50,16 @@ namespace Hide_and_Seek
             RedrawForm();
         }
 
+        string dishes; 
+
         private void RedrawForm()
         {
             exits.Items.Clear();
+
+            /*dishes = Convert.ToString(rnd.Next(1, 3)) +
+                Convert.ToString(rnd.Next(1, 3)) +
+                Convert.ToString(rnd.Next(1, 3));*/
+
             for (int i = 0; i < currentLocation.Exits.Length; i++)
                 exits.Items.Add(currentLocation.Exits[i].Name);
             exits.SelectedIndex = 0;
@@ -67,9 +76,15 @@ namespace Hide_and_Seek
                 goThroughTheDoor.Visible = true;
             else
                 goThroughTheDoor.Visible = false;
-            //====================================
-            if (currentLocation == kitchen)
+
+            //=======================================================================
+            //=======================================================================
+            if (currentLocation == game)
             {
+                dishes = Convert.ToString(rnd.Next(1, 3)) +
+                Convert.ToString(rnd.Next(1, 3)) +
+                Convert.ToString(rnd.Next(1, 3));
+
                 check.Visible = false;
                 goThroughTheDoor.Visible = false;
                 goHere.Visible = false;
@@ -77,14 +92,18 @@ namespace Hide_and_Seek
                 button1.Visible = true;
                 textBox1.Visible = true;
                 description.Text = "Злой повар заставил вас съесть его блюда в определённом порядке." +
-                    "У вас есть 10 попыток, чтобы выбраться отсюда. Иначе игра будет окончена";
+                    "У вас есть 10 попыток, чтобы выбраться отсюда. Иначе игра будет окончена" +
+                    "1 - котлеты с макаронаи;" +
+                    "2 - котлеты с картофельным пюре;" +
+                    "3 - оладьи со сгущёнкой";
 
                 MessageBox.Show("Хе-хе-хе, я злой повар! Закормлю тебя до смерти, " +
                     "если ты за 10 попыток не составишь правильный порядок моих блюд");
                 MessageBox.Show("Вам даны блюда под номерами 1, 2, 3. Вы должны составить их правильный порядок");
 
             }
-            //====================================
+            //=======================================================================
+            //=======================================================================
         }
 
         private void CreateObjects()
@@ -94,6 +113,9 @@ namespace Hide_and_Seek
                       "внутри шкафа", "дубовая дверь с латунной ручкой");
             diningRoom = new RoomWithHidingPlace("Столовая", "хрустальная люстра",
                        "в высоком шкафу");
+            //===============================================================
+            game = new OutsideWithDoor("Кухня", false, " ");
+            //===============================================================
             kitchen = new RoomWithDoor("Кухня", "плита из нержавеющей стали",
                       "в шкафу", "сетчатая дверь");
             stairs = new Room("Лестница", "деревянные перила");
@@ -111,8 +133,11 @@ namespace Hide_and_Seek
             garden = new OutsideWithHidingPlace("Сад", false, "внутри сарая");
             driveway = new OutsideWithHidingPlace("Дорога", true, "в гараже");
 
-            diningRoom.Exits = new Location[] { livingRoom, kitchen };
+            diningRoom.Exits = new Location[] { game/*kitchen*/, livingRoom };
             livingRoom.Exits = new Location[] { diningRoom, stairs };
+            //================
+            game.Exits = new Location[] { kitchen };
+            //================
             kitchen.Exits = new Location[] { diningRoom };
             stairs.Exits = new Location[] { livingRoom, hallway };
             hallway.Exits = new Location[] { stairs, bathroom, masterBedroom, secondBedroom };
@@ -128,7 +153,7 @@ namespace Hide_and_Seek
             frontYard.DoorLocation = livingRoom;
 
             kitchen.DoorLocation = backYard;
-            backYard.DoorLocation = kitchen;
+            backYard.DoorLocation = game;//kitchen;
         }
 
         private void ResetGame(bool displayMessage)
@@ -147,8 +172,10 @@ namespace Hide_and_Seek
             goThroughTheDoor.Visible = false;
             exits.Visible = false;
             button1.Visible = false;
+            textBox1.Visible = false;
         }
 
+        //========================================================================
         //========================================================================
         private void GameOver(bool displayMessage)
         {
@@ -163,9 +190,12 @@ namespace Hide_and_Seek
             goThroughTheDoor.Visible = false;
             exits.Visible = false;
             button1.Visible = false;
+            textBox1.Visible = false;
 
             description.Text = "Я начинаю считать!";
         }
+        //========================================================================
+        //========================================================================
 
         private void goHere_Click(object sender, EventArgs e)
         {
@@ -211,15 +241,41 @@ namespace Hide_and_Seek
 
         static string[] mas = new string[10];
         static int k = 1;
+        
         private void button1_Click(object sender, EventArgs e)
         {
             if (k != 10)
             {
+                //========================================================
+                MessageBox.Show(dishes);
+                //========================================================
                 textBox1.Text = Convert.ToString(rnd.Next(1, 3)) +
-                    Convert.ToString(rnd.Next(1, 3)) +
-                    Convert.ToString(rnd.Next(1, 3));
-                mas[k] = textBox1.Text;
-                k++;
+                        Convert.ToString(rnd.Next(1, 3)) +
+                        Convert.ToString(rnd.Next(1, 3));
+                if (textBox1.Text == dishes)
+                {
+                    k = 0;
+                    check.Visible = false;
+                    goThroughTheDoor.Visible = false;
+                    goHere.Visible = true;
+                    exits.Visible = true;
+                    button1.Visible = false;
+                    textBox1.Visible = false;
+                    description.Text = "Вы свободны!";
+                    MessageBox.Show("Ты угадал блюда злого повара! Теперь ты можешь идти дальше");
+                }
+                else
+                {
+                    if (mas.Contains(textBox1.Text))
+                    {
+                        MessageBox.Show("Вы уже вводили такую комбинацию");
+                    }
+                    else
+                    {
+                        mas[k] = textBox1.Text;
+                        k++;
+                    }
+                }
             }
             else GameOver(true);
         }

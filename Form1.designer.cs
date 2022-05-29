@@ -46,6 +46,7 @@
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(409, 190);
             this.description.TabIndex = 0;
+            this.description.Text = "Прятки!";
             // 
             // goHere
             // 
@@ -140,6 +141,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Прячься и ищи";
             this.ResumeLayout(false);
             this.PerformLayout();
